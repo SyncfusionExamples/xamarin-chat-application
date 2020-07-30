@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sfChat="clr-namespace:Syncfusion.XForms.Chat;assembly=Syncfusion.SfChat.XForms"
+             mc:Ignorable="d"
+             xmlns:viewModel="clr-namespace:AndroidChatApplication.ViewModels.Chat"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:converter="clr-namespace:AndroidChatApplication.Converters"
+             xmlns:local="clr-namespace:AndroidChatApplication.Views.Chat"
+             xmlns:local1="clr-namespace:AndroidChatApplication.Behaviors.Chat"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="AndroidChatApplication.Views.Chat.MessagePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+            <local:MessageDataTemplateSelector x:Key="MessageDataTemplateSelector" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.BindingContext>
+        <viewModel:MessagesViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout
+                                Padding="10"
+                                BackgroundColor="{DynamicResource Gray-White}"
+                                HorizontalOptions="FillAndExpand"
+                                Orientation="Horizontal"
+                                Spacing="0"
+                                VerticalOptions="Fill"
+                                Grid.Row="0">
+
+                <!--Back Button-->
+                <buttons:SfButton
+                                    Command="{Binding BackCommand}"
+                                    Style="{StaticResource NavigationBarButtonStyle}"
+                                    Text="{StaticResource Back}" />
+
+                <!--Rounded Profile Image-->
+                <border:SfBorder
+                                    Margin="8,0"
+                                    BackgroundColor="{DynamicResource Gray-200}"
+                                    Style="{StaticResource ProfileBorderStyle}">
+                                    <Image
+                                        HeightRequest="35"
+                                        WidthRequest="35" Source="name.png">
+                                    </Image>
+                </border:SfBorder>
+
+                <!--Profile Name-->
+                <Label
+                                    FontFamily="{StaticResource Montserrat-SemiBold}"
+                                    FontSize="16"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{Binding ProfileName}"
+                                    TextColor="{DynamicResource Gray-900}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ProfileCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <sfChat:SfChat x:Name="sfChat"
+                           Grid.Row="1"
+                           Messages="{Binding Messages}"
+                           CurrentUser="{Binding CurrentUser}"
+                           TypingIndicator="{Binding TypingIndicator}"
+                           ShowTypingIndicator="{Binding ShowTypingIndicator}"
+                           ShowTimeBreak="True"
+                           ShowIncomingMessageTimestamp="True"
+                           ShowOutgoingMessageTimestamp="True"
+                           IncomingMessageTimestampFormat="hh:mm tt"
+                           OutgoingMessageTimestampFormat="hh:mm tt"
+                           ShowOutgoingMessageAvatar="True" 
+                           StickyTimeBreak="False"
+                           MessageShape="RoundedRectangle"
+                           SendMessageCommand="{Binding SendMessageCommand}">
+            </sfChat:SfChat>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

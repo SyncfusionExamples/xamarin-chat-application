@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:AndroidChatApplication.ViewModels"
+             mc:Ignorable="d"
+             x:Class="AndroidChatApplication.Views.StartPage">
+
+    <ContentPage.BindingContext>
+        <viewModel:StartPageViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Grid Padding="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="1" Text="Connect to public Channels"
+                    Command="{Binding ConnectCommand}"
+                    x:Name="Connect_Button"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    IsVisible="False"/>
+            <StackLayout IsVisible="{Binding IsBusy}" Grid.Row="2">
+                <StackLayout.Orientation>
+                    <OnPlatform x:TypeArguments="StackOrientation"/>
+                </StackLayout.Orientation>
+                <ActivityIndicator IsVisible="{Binding IsBusy}"/>
+                <Label x:Name="Connect_label" HorizontalTextAlignment="Center"
+                       FontSize="Medium"
+                       Text="Connecting to Channels...."/>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
