@@ -13,8 +13,8 @@ namespace AndroidChatApplication.Helpers
         {
             var deviceId = CrossDeviceInfo.Current.Id;
             const string twilioAccountSid = "AC3b4d9037a04f31c8e64fcd02ff2c6a9d";
-            const string twilioApiKey = "SK797d3f329ea89c8d0a5eb7a27d92274d";
-            const string twilioApiSecret = "B8mbBv19bFxRYZFv75dUFbmSsINeOd1x";
+            const string twilioApiKey = " Use your own twilio Api Key";
+            const string twilioApiSecret = "Use you own twilio Api Secret";
 
             var identity = "Syncfusion";
             var applicationName = "AndroidChatApplication";
