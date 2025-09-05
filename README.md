@@ -34,7 +34,7 @@ TwilioMessenger:
             var task = new TaskCompletionSource<bool>();
 
             //Get token to access the Twilio Account
-            var token = await TwilioHelper.GetTokenAsync();
+         
             
             // Initialization of chat client
             ChatClient.Create(Android.App.Application.Context, 
